@@ -1,0 +1,27 @@
+{
+  "settings": {
+    "refresh_interval": "1s",
+    "number_of_shards" : 1
+  },
+  "aliases": {
+    "url_shortener": {}
+  },
+  "mappings": {
+    "url": {
+      "properties": {
+        "slug": {
+          "type": "keyword"
+        },
+        "url": {
+          "type": "keyword"
+        },
+        "created_at": {
+          "type": "date"
+        },
+        "updated_at": {
+          "type": "date"
+        }
+      }
+    }
+  }
+}
