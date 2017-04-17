@@ -1,0 +1,7 @@
+services:
+    es_document_repository.url_shortener:
+        class: UrlShortenerBundle\ESDocumentRepository\UrlShortenerRepository
+        arguments:
+            - "@elasticsearch_client"
+            - "%url_shortener.index%"
+            - "%url_shortener.type%"

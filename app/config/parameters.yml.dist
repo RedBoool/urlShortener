@@ -17,3 +17,9 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
+
+    # Elasticsearch configuration
+    elasticsearch_servers:
+        - {host: localhost, port: 9200}
+    url_shortener.index: url_shortener
+    url_shortener.type: url
