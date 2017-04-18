@@ -1,3 +1,4 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+url_shortener:
+    resource: "@UrlShortenerBundle/Controller/"
+    type:     annotation
+    prefix:   /
