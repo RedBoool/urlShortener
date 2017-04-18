@@ -1,1 +1,13 @@
-Hello World!
+<div style="text-align:center;">
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.url) }}
+
+    {{ form_row(form.submit, { 'label': 'Submit me' }) }}
+{{ form_end(form) }}
+</div>
+
+{% if uniqid %}
+    <p>{{ domaine }}{{ path('redir', {'redir_slug': uniqid}) }}</p>
+{% endif %}

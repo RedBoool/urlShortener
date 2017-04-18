@@ -5,21 +5,41 @@ namespace UrlShortenerBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use UrlShortenerBundle\ESDocumentRepository\UrlShortenerRepository;
 
 class DefaultController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="home")
+     * @Method({"GET|POST"})
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        return $this->render('UrlShortenerBundle:Default:index.html.twig');
+        $form = $this->createFormBuilder()
+            ->add('url', TextType::class)
+            ->add('submit', SubmitType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            print $data['url'];
+
+            $uniqid = uniqid();
+        }
+
+        return $this->render('UrlShortenerBundle:Default:index.html.twig', array(
+            'form' => $form->createView(),
+            'uniqid' => empty($uniqid) ?: $uniqid,
+        ));
     }
 
     /**
-     * @Route("/r/{redir_slug}")
+     * @Route("/r/{redir_slug}", name="redir")
      * @Method({"GET"})
      */
     public function redirAction(Request $request, $redir_slug)
